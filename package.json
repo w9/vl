@@ -1,0 +1,28 @@
+{
+  "name": "vl",
+  "version": "0.0.0",
+  "description": "Replacement of bash \"column\". Format tables for display in terminal. Lightning fast and little memory usage.",
+  "main": "bin/vl",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/w9/vl.git"
+  },
+  "keywords": [
+    "table",
+    "format",
+    "column"
+  ],
+  "bin": "bin/vl",
+  "author": "Xun Zhu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/w9/vl/issues"
+  },
+  "homepage": "https://github.com/w9/vl",
+  "dependencies": {
+    "minimist": "0.0.8"
+  }
+}
