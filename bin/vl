@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+var color = require('bash-color');
 var fs = require('fs');
 var argv = require('minimist')(process.argv.slice(2));
 var tty = require('tty');
@@ -34,7 +35,7 @@ function makeSpaces(n) {
 }
 
 function info() {
-    process.stdout.write('No filename or stdin specified.\n\nUsage: vl [FILE] [OPTION]...\n\n  -m  number of spaces to separate columns. default = 1\n  -s  a regular expression to match column separators. default = [\\t,]\n  -k  number of lines to skip formatting. default = 0\n  -e  number of lines for estimation of column width. default = 70\n');
+    process.stdout.write(color.red('No filename or stdin specified.') + '\n\nUsage: vl [FILE] [OPTION]...\n\n  -m  number of spaces to separate columns. default = 1\n  -s  a regular expression to match column separators. default = [\\t,]\n  -k  number of lines to skip formatting. default = 0\n  -e  number of lines for estimation of column width. default = 70\n');
     process.exit();
 }
 
