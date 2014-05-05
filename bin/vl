@@ -2,8 +2,13 @@
 
 var color = require('bash-color');
 var fs = require('fs');
-var argv = require('minimist')(process.argv.slice(2));
-var tty = require('tty');
+var yargs = require('yargs')
+    .usage('('+color.yellow('V',true)+')iew ('+color.yellow('L',true)+')arge table.\n\nUsage: vl [FILE] [OPTIONS]...')
+    .option('m', { alias:'column_margin', describe:'number of spaces to separate columns', default:1 })
+    .option('s', { alias:'separator', describe:'a regular expression to match column separators', default:'[\\t,]' })
+    .option('k', { alias:'skip', describe:'number of lines to skip formatting', default:0 })
+    .option('e', { alias:'lines-for-estimation', describe:'number of lines for estimation of column width', default:70 });
+var argv = yargs.argv;
 
 var re;
 var widths;
@@ -16,16 +21,17 @@ var continueReading = true;
 var FILENAME = argv._[0];
 if (typeof(FILENAME)==="string") {
     re = fs.createReadStream(FILENAME);
-} else if (!tty.isatty()){
+} else if (!process.stdin.isTTY){
     re = process.stdin;
 } else {
-    info();
+    yargs.showHelp();
+    process.exit();
 }
 
-var COLUMN_MARGIN = (typeof(argv.m)==='number') ? argv.m : 1;
-var SEP = (typeof(argv.s)==='string') ? new RegExp(argv.s) : /[\t,]/;
-var SKIP = (typeof(argv.k)==='number') ? argv.k : 0;
-var LINES_FOR_ESTIMATION = (typeof(argv.e)==='number' && argv.e>0) ? argv.e : 70;
+var COLUMN_MARGIN = argv.m;
+var SEP = new RegExp(argv.s);
+var SKIP = argv.k;
+var LINES_FOR_ESTIMATION = argv.e;
 
 var linesLeftForEstimation = LINES_FOR_ESTIMATION;
 var linesToSkip = SKIP;
@@ -34,10 +40,10 @@ function makeSpaces(n) {
     return Array(n+1).join(' ');
 }
 
-function info() {
-    process.stdout.write(color.red('No filename or stdin specified.') + '\n\nUsage: vl [FILE] [OPTION]...\n\n  -m  number of spaces to separate columns. default = 1\n  -s  a regular expression to match column separators. default = [\\t,]\n  -k  number of lines to skip formatting. default = 0\n  -e  number of lines for estimation of column width. default = 70\n');
-    process.exit();
-}
+//function info() {
+//    process.stdout.write(color.red('No filename or stdin specified.') + '\n\nUsage: vl [FILE] [OPTION]...\n\n  -m  number of spaces to separate columns. default = 1\n  -s  a regular expression to match column separators. default = [\\t,]\n  -k  number of lines to skip formatting. default = 0\n  -e  number of lines for estimation of column width. default = 70\n');
+//    process.exit();
+//}
 
 /*******************  MAIN **********************/
 
