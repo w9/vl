@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-// thlksdfhlkajflaf
 var color = require('bash-color');
 var fs = require('fs');
 var yargs = require('yargs')
