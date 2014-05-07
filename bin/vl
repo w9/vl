@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-var color = require('bash-color');
+var colors = require('colors');
 var fs = require('fs');
 var yargs = require('yargs')
-    .usage('('+color.yellow('V',true)+')iew ('+color.yellow('L',true)+')arge table.\n\nUsage: vl [FILE] [OPTIONS]...')
+    .usage('('+'v'.yellow.bold+')iew ('+'l'.yellow.bold+')arge table.\n\nUsage: vl [FILE] [OPTIONS]...')
     .example('vl table.txt', 'print the formatted table to stdout')
     .example('vl table.txt | less -S -N', 'pipe the output to less')
     .example('vl table.txt -k 1 | less -S -N', 'skip the first line')
