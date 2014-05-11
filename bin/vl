@@ -62,7 +62,7 @@ re.on('readable', function () {
         // Hold the output.
         var lines = cur.split('\n');
         if (linesToSkip>0) {
-            process.stdout.write(lines.slice(0,linesToSkip).join('\n'));
+            process.stdout.write(lines.slice(0,linesToSkip).join('\n')+'\n');
             str += lines.slice(linesToSkip).join('\n');
             linesToSkip -= lines.length - 1;
         } else {
