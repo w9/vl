@@ -1,6 +1,6 @@
 {
   "name": "vl",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Replacement of bash \"column\".",
   "main": "bin/vl",
   "scripts": {
@@ -16,7 +16,10 @@
     "format",
     "column"
   ],
-  "bin": "bin/vl",
+  "bin": {
+      "vl": "bin/vl",
+      "vll": "bin/vll"
+  },
   "author": "Xun Zhu",
   "license": "ISC",
   "bugs": {
